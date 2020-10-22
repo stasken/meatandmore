@@ -1,0 +1,61 @@
+#navbar {
+  margin: 2rem 0rem;
+  background-color: white;
+}
+
+#menu>li {
+  float: right !important;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  font-weight: 100;
+  margin: 0 1rem;
+  display: block;
+}
+
+a.nav-link {
+  color: black !important;
+  cursor: pointer;
+}
+
+
+li>a.active {
+  color: darkslategray !important;
+}
+
+/* transition */
+nav ul li a:after,
+nav ul li a:before {
+  transition: all .7s;
+}
+
+/* stroke */
+nav.navbar ul li a {
+  position: relative;
+}
+
+nav ul li a:hover {
+  color: rgb(111, 150, 150) !important;
+}
+
+nav.navbar ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: rgb(111, 150, 150) !important;
+  height: 1px;
+}
+
+nav.navbar ul li a:hover:after {
+  width: 100%;
+}
+
+
+/* Media queries */
+@media only screen and (max-width: 1024px) {}

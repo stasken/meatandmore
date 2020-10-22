@@ -1,0 +1,23 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: darkslategray !important;
+  font-family: "Avenir Next", sans-serif;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: "Avenir next", sans-serif;
+  font-weight: 400;
+}
