@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+}
+
+#visitors {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#visitors td,
+#visitors th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+#visitors th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}

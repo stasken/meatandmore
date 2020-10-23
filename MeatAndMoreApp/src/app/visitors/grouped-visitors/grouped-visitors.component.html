@@ -1,0 +1,13 @@
+<table id="allvisitors">
+  <ng-container>
+    <tr>
+      <td *ngFor="let column of displayedColumns">
+        {{column}} </td>
+    </tr>
+    <tr *ngFor="let hour of hoursArray; let i = index">
+      <td *ngIf="i == 13">12 +</td>
+      <td *ngIf="i !== 13">{{i}}</td>
+      <td>{{hour}}</td>
+    </tr>
+  </ng-container>
+</table>

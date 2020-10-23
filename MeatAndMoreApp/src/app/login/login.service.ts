@@ -1,5 +1,5 @@
 import { Injectable, Inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
 import { Observable, throwError } from "rxjs";
@@ -42,8 +42,10 @@ export class LoginService {
       .pipe(retry(1), catchError(this.errorHandler));
   }
 
-  public logOut() {
-    this.storage.remove(environment.storage.AUTH_TOKEN);
+  public logOut(logoutValues) {
+    return this.http
+      .put<string>(this.myApiUrl + "loggedvisitors/" + logoutValues.name, "")
+      .pipe(retry(1), catchError(this.errorHandler));
   }
 
   /**

@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, OnInit, Inject, Input } from "@angular/core";
 import { LoginService } from "./login.service";
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
 import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -9,7 +10,13 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  constructor(private loginService: LoginService) {}
+  loginValues: any;
+
+  constructor(
+    private router: Router,
+    @Inject(LOCAL_STORAGE) private storage: StorageService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -17,7 +24,10 @@ export class LoginComponent implements OnInit {
     this.loginService
       .logIn(formValues.username, formValues.password)
       .subscribe((response) => {
-        console.log(response);
+        this.storage.set(environment.storage.AUTH_TOKEN, response.token);
+        this.storage.set(environment.storage.AUTH_ID, response.id);
+        this.router.navigate(["/"]);
+        window.location.reload();
       });
   }
 }

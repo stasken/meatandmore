@@ -10,20 +10,20 @@
           <a class="nav-link">Meat & More</a>
         </li>
         <li class="nav-item" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link">Visitor log in</a>
+          <a class="nav-link">VISITORS</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="loggedIn">
           <a class="nav-link" [routerLink]="['/visitors']" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">Visitors</a>
+            [routerLinkActiveOptions]="{ exact: true }">All Visitors</a>
         </li>
-        <li class="nav-item" [routerLink]="['/login']" routerLinkActive="active"
+        <li class="nav-item" *ngIf="!loggedIn" [routerLink]="['/login']" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link">Admin log in</a>
+          <a class="nav-link">ADMIN</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Log out</a>
+        <li class="nav-item" *ngIf="loggedIn">
+          <a class="nav-link" (click)="logOut()">Log out</a>
         </li>
       </ul>
     </div>

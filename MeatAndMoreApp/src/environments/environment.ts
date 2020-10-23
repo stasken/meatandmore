@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiUrl: "https://localhost:44372/api/",
   storage: {
+    AUTH_ID: "id",
     AUTH_TOKEN: "token",
   },
 };

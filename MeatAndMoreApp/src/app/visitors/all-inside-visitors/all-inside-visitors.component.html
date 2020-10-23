@@ -1,0 +1,19 @@
+<table id="visitors">
+  <ng-container>
+    <tr>
+      <td *ngFor="let column of displayedColumns">
+        {{column}} </td>
+    </tr>
+    <tr id={{visitor.id}} *ngFor="let visitor of allVisitors;">
+      <td>{{visitor.firstName}}</td>
+      <td>{{visitor.lastName}}</td>
+      <td>{{visitor.typeVisit}}</td>
+      <td>{{visitor.companyName}}</td>
+      <td>{{visitor.licensePlate}}</td>
+      <td>{{visitor.loggedIn | date:'MM/dd'}}</td>
+      <td>{{visitor.loggedIn | date:'HH:mm'}}</td>
+      <td>{{visitor.loggedOut | date:'HH:mm'}}</td>
+      <td><button class="btn btn-danger" (click)="remove(visitor.id)">Remove</button></td>
+    </tr>
+  </ng-container>
+</table>

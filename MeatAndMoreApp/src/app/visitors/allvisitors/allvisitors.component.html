@@ -1,0 +1,18 @@
+<table id="allvisitors">
+  <ng-container>
+    <tr>
+      <td *ngFor="let column of displayedColumns">
+        {{column}} </td>
+    </tr>
+    <tr *ngFor="let visitor of allVisitors">
+      <td>{{visitor.firstName}}</td>
+      <td>{{visitor.lastName}}</td>
+      <td>{{visitor.typeVisit}}</td>
+      <td>{{visitor.companyName}}</td>
+      <td>{{visitor.licensePlate}}</td>
+      <td>{{visitor.loggedIn | date:'MM/dd'}}</td>
+      <td>{{visitor.loggedIn | date:'HH:mm'}}</td>
+      <td>{{visitor.loggedOut | date:'HH:mm'}}</td>
+    </tr>
+  </ng-container>
+</table>

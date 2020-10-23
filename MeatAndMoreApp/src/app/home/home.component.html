@@ -3,22 +3,49 @@
     <h1 class="text-center">Beste bezoeker. Meld u hier aan.</h1>
   </div>
   <div id="aandmeldform">
-    <form>
+    <form #visitorForm="ngForm" (ngSubmit)="addVisitor(visitorForm.value)">
       <div class="form-group">
-        <label for="voornaam">Firstname</label>
-        <input type="text" class="form-control" id="voornaam" placeholder="Enter firstname">
+        <label for="voornaam">Firstname *</label>
+        <input type="text" (ngModel)="visitorValues.firstname" name="firstname" required class="form-control"
+          id="voornaam" placeholder="Enter firstname">
       </div>
       <div class="form-group">
-        <label for="achternaam">Lastname</label>
-        <input type="text" class="form-control" id="achternaam" placeholder="Enter lastname">
+        <label for="achternaam">Lastname *</label>
+        <input type="text" (ngModel)="visitorValues.lastname" name="lastname" class="form-control" id="achternaam"
+          placeholder="Enter lastname">
+      </div>
+      <div class="form-group">
+        <label for="bedrijfsnaam">Company name</label>
+        <input type="text" (ngModel)="visitorValues.companyname" name="companyname" class="form-control"
+          id="bedrijfsnaam" placeholder="Enter name of company">
       </div>
       <div class="form-group">
         <label for="type">Type visitor</label>
-
+        <select id="type" (ngModel)="visitorValues.type" name="type" class="form-control">
+          <option *ngFor="let type of typeList" [value]="type">{{type}}</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="nummerplaat">License plate</label>
-        <input type="text" class="form-control" id="nummerplaat" placeholder="Enter license plate">
+        <input type="text" (ngModel)="visitorValues.licensePlate" name="licensePlate" class="form-control"
+          id="nummerplaat" placeholder="Enter license plate">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div id="afmelden" style="margin-top: 2rem;" class="row justify-content-center">
+  <div class="col-12">
+    <h1 class="text-center">Meld u zeker hier af.</h1>
+  </div>
+  <div id="aandmeldform">
+    <form #logoutForm="ngForm" (ngSubmit)="logVisitorOut(logoutForm.value)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <select id="name" (ngModel)="logoutValues.name" name="name" class="form-control">
+          <option *ngFor="let vis of insideVisitors" [value]="vis.id">{{vis.lastName}}</option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
