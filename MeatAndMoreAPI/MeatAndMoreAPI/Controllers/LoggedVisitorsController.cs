@@ -26,12 +26,21 @@ namespace MeatAndMoreAPI.Controllers
                 _loggedVisitorRepository = loggedVisitorRepository;
             }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LoggedVisitorDTO>>> GetLoggedVisitors()
         {
+            if (User.IsInRole("admin"))
+            {
                 return Ok(await _loggedVisitorRepository.GetLoggedVisitors().ConfigureAwait(false));
+            }
+            return Forbid(JwtBearerDefaults.AuthenticationScheme);
+        }
 
+        [AllowAnonymous]
+        [HttpGet("logout")]
+        public async Task<ActionResult<IEnumerable<LoggedVisitorDTO>>> GetLoggedVisitorsToLogOut()
+        {
+                return Ok(await _loggedVisitorRepository.GetLoggedVisitors().ConfigureAwait(false));
         }
 
         [AllowAnonymous]

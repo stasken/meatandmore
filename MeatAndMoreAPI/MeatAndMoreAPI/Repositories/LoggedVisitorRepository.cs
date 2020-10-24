@@ -104,6 +104,20 @@ namespace MeatAndMoreAPI.Repositories
                 .ConfigureAwait(false);
         }
 
+        public async Task<IEnumerable<LoggedVisitorDTO>> GetLoggedVisitorsToLogOut()
+        {
+            return await _context.LoggedVisitors.Select(lv => new LoggedVisitorDTO
+            {
+                Id = lv.Id,
+                FirstName = lv.FirstName,
+                LastName = lv.LastName,
+                InsideBuilding = lv.InsideBuilding
+            })
+                .AsNoTracking()
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
         public async Task<string> PutLoggedVisitor(int id)
         {
             try

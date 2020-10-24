@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.getVisitors();
+    this.getVisitorsToLogOut();
   }
 
   addVisitor(formValues) {
@@ -73,8 +73,9 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  getVisitors() {
-    this.visitorService.getVisitors().subscribe((response) => {
+  getVisitorsToLogOut() {
+    this.visitorService.getVisitorsToLogOut().subscribe((response) => {
+      console.log(response);
       response.forEach((vis) => {
         if (vis.insideBuilding) {
           this.insideVisitors.push(vis);

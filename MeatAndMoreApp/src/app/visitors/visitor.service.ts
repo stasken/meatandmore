@@ -1,9 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { retry, catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { Visitor } from "./visitor.model";
+import { StorageService, LOCAL_STORAGE } from "ngx-webstorage-service";
 
 @Injectable({
   providedIn: "root",
@@ -11,7 +12,10 @@ import { Visitor } from "./visitor.model";
 export class VisitorService {
   myApiUrl: string;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    @Inject(LOCAL_STORAGE) private storage: StorageService
+  ) {
     this.myApiUrl = environment.apiUrl;
   }
 
@@ -22,12 +26,20 @@ export class VisitorService {
   }
 
   public getVisitors(): Observable<Visitor[]> {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${environment.storage.AUTH_TOKEN}`,
-    });
+    console.log(this.storage.get(environment.storage.AUTH_TOKEN));
     return this.http
-      .get<Visitor[]>(this.myApiUrl + "loggedvisitors", { headers: headers })
+      .get<Visitor[]>(this.myApiUrl + "loggedvisitors", {
+        headers: new HttpHeaders({
+          Authorization:
+            "Bearer " + this.storage.get(environment.storage.AUTH_TOKEN),
+        }),
+      })
+      .pipe(retry(1), catchError(this.errorHandler));
+  }
+
+  public getVisitorsToLogOut(): Observable<Visitor[]> {
+    return this.http
+      .get<Visitor[]>(this.myApiUrl + "loggedvisitors/logout")
       .pipe(retry(1), catchError(this.errorHandler));
   }
 

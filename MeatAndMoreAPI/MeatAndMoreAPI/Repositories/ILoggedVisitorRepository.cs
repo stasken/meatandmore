@@ -10,6 +10,7 @@ namespace MeatAndMoreAPI.Repositories
     {
         Task<LoggedVisitorDTO> GetLoggedVisitor(int id);
         Task<IEnumerable<LoggedVisitorDTO>> GetLoggedVisitors();
+        Task<IEnumerable<LoggedVisitorDTO>> GetLoggedVisitorsToLogOut();
         Task<LoggedVisitorDTO> AddNewLoggedVisitor(LoggedVisitorDTO LoggedVisitorDTO);
         Task<string> PutLoggedVisitor(int id);
         Task<LoggedVisitorDTO> DeleteLoggedVisitor(int id);
