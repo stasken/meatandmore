@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
+import { LoginService } from "../login/login.service";
 
 @Component({
   selector: "navbar",
@@ -13,8 +14,11 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    @Inject(LOCAL_STORAGE) private storage: StorageService
-  ) {}
+    @Inject(LOCAL_STORAGE) private storage: StorageService,
+    private loginService: LoginService
+  ) {
+    loginService.getLoggedIn.subscribe((logged) => (this.loggedIn = logged));
+  }
 
   ngOnInit(): void {
     var token = this.storage.get(environment.storage.AUTH_TOKEN);

@@ -11,7 +11,7 @@ namespace MeatAndMoreAPI.Repositories
         Task<LoggedVisitorDTO> GetLoggedVisitor(int id);
         Task<IEnumerable<LoggedVisitorDTO>> GetLoggedVisitors();
         Task<LoggedVisitorDTO> AddNewLoggedVisitor(LoggedVisitorDTO LoggedVisitorDTO);
-        Task<LoggedVisitorDTO> PutLoggedVisitor(int id, LoggedVisitorDTO LoggedVisitorDTO);
+        Task<string> PutLoggedVisitor(int id);
         Task<LoggedVisitorDTO> DeleteLoggedVisitor(int id);
     }
 }

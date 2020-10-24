@@ -1,3 +1,26 @@
 #aanmelden {
   color: white
 }
+
+a {
+  text-decoration: none;
+  color: white
+}
+
+.active {
+  color: red
+}
+
+#error {
+  margin-top: 2rem;
+  padding: 1rem;
+  color: #fc7a7a;
+  border: 1px solid red;
+}
+
+#created {
+  margin-top: 2rem;
+  padding: 1rem;
+  color: #3eff5f;
+  border: 1px solid green;
+}

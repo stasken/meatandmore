@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { retry, catchError } from "rxjs/operators";
 import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { throwError, Observable } from "rxjs";
 import { Visitor } from "./visitor.model";
 
@@ -22,8 +22,12 @@ export class VisitorService {
   }
 
   public getVisitors(): Observable<Visitor[]> {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${environment.storage.AUTH_TOKEN}`,
+    });
     return this.http
-      .get<Visitor[]>(this.myApiUrl + "loggedvisitors")
+      .get<Visitor[]>(this.myApiUrl + "loggedvisitors", { headers: headers })
       .pipe(retry(1), catchError(this.errorHandler));
   }
 

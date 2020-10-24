@@ -31,7 +31,7 @@ namespace MeatAndMoreAPI.Repositories
                 LicensePlate = loggedVisitorDTO.LicensePlate,
                 LoggedIn = loggedVisitorDTO.LoggedIn,
                 LoggedOut = loggedVisitorDTO.LoggedOut,
-                InsideBuilding = false
+                InsideBuilding = true
             });
 
             await _context.SaveChangesAsync().ConfigureAwait(false);
@@ -104,23 +104,16 @@ namespace MeatAndMoreAPI.Repositories
                 .ConfigureAwait(false);
         }
 
-        public async Task<LoggedVisitorDTO> PutLoggedVisitor(int id, LoggedVisitorDTO loggedVisitorDTO)
+        public async Task<string> PutLoggedVisitor(int id)
         {
-            if (loggedVisitorDTO == null) { throw new ArgumentNullException(nameof(loggedVisitorDTO)); }
-
             try
             {
                 LoggedVisitor loggedVisitor = await _context.LoggedVisitors.FirstOrDefaultAsync(lv => lv.Id == id);
-                loggedVisitor.FirstName = loggedVisitorDTO.FirstName;
-                loggedVisitor.LastName = loggedVisitorDTO.LastName;
-                loggedVisitor.TypeVisit = loggedVisitorDTO.TypeVisit;
-                loggedVisitor.CompanyName = loggedVisitorDTO.CompanyName;
-                loggedVisitor.LicensePlate = loggedVisitorDTO.LicensePlate;
-                loggedVisitor.LoggedIn = loggedVisitorDTO.LoggedIn;
-                loggedVisitor.LoggedOut = loggedVisitorDTO.LoggedOut;
-                loggedVisitor.InsideBuilding = loggedVisitorDTO.InsideBuilding;
+                loggedVisitor.LoggedOut = DateTime.Now;
+                loggedVisitor.InsideBuilding = false;
 
                 await _context.SaveChangesAsync().ConfigureAwait(false);
+
             } catch (DbUpdateConcurrencyException)
             {
                 if (!LoggedVisitorExists(id))
@@ -133,7 +126,7 @@ namespace MeatAndMoreAPI.Repositories
                 }
             }
 
-            return loggedVisitorDTO;
+            return "logged Out";
         }
         private bool LoggedVisitorExists(int id)
         {

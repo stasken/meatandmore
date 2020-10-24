@@ -14,7 +14,6 @@ namespace MeatAndMoreAPI.DTOs
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
         public string TypeVisit { get; set; }
         public string CompanyName { get; set; }
         public string LicensePlate { get; set; }

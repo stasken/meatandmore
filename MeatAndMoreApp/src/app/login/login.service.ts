@@ -1,20 +1,24 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable, Inject, Output, EventEmitter } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
 import { User } from "./user.model";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
 })
 export class LoginService {
   public myApiUrl: string;
+  @Output() getLoggedIn: EventEmitter<any> = new EventEmitter();
+  @Output() error: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private http: HttpClient,
-    @Inject(LOCAL_STORAGE) private storage: StorageService
+    @Inject(LOCAL_STORAGE) private storage: StorageService,
+    private router: Router
   ) {
     this.myApiUrl = environment.apiUrl;
   }
@@ -32,14 +36,23 @@ export class LoginService {
     return true;
   }
 
-  public logIn(username: string, password: string): Observable<User> {
+  public logIn(username: string, password: string) {
     const user = {
       Username: username,
       Password: password,
     };
     return this.http
       .post<User>(this.myApiUrl + "users/login", user)
-      .pipe(retry(1), catchError(this.errorHandler));
+      .pipe(retry(1), catchError(this.errorHandler))
+      .subscribe(
+        (response) => {
+          this.storage.set(environment.storage.AUTH_TOKEN, response.token);
+          this.storage.set(environment.storage.AUTH_ID, response.id);
+          this.router.navigate(["/visitors"]);
+          this.getLoggedIn.emit(true);
+        },
+        (error) => this.error.emit(true)
+      );
   }
 
   public logOut(logoutValues) {

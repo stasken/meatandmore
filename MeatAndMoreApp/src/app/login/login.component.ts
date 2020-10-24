@@ -11,23 +11,19 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   loginValues: any;
+  error: boolean = false;
 
   constructor(
     private router: Router,
     @Inject(LOCAL_STORAGE) private storage: StorageService,
     private loginService: LoginService
-  ) {}
+  ) {
+    loginService.error.subscribe((error) => (this.error = error));
+  }
 
   ngOnInit(): void {}
 
   login(formValues) {
-    this.loginService
-      .logIn(formValues.username, formValues.password)
-      .subscribe((response) => {
-        this.storage.set(environment.storage.AUTH_TOKEN, response.token);
-        this.storage.set(environment.storage.AUTH_ID, response.id);
-        this.router.navigate(["/"]);
-        window.location.reload();
-      });
+    this.loginService.logIn(formValues.username, formValues.password);
   }
 }

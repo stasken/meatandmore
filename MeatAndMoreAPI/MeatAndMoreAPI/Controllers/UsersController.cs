@@ -2,6 +2,7 @@
 using MeatAndMoreAPI.DTOs;
 using MeatAndMoreAPI.Repositories;
 using MeatAndMoreAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +31,11 @@ namespace MeatAndMoreAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
-            return Ok(await _userRepository.GetUsers().ConfigureAwait(false));
+            if (User.IsInRole("admin"))
+            {
+                return Ok(await _userRepository.GetUsers().ConfigureAwait(false));
+            }
+            return Forbid(JwtBearerDefaults.AuthenticationScheme);
         }
 
         [HttpGet("{id}")]

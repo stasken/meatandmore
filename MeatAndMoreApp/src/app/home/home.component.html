@@ -1,53 +1,93 @@
+<div class="row">
+  <div class="col-12" style="text-align: center;">
+    <p> <a href="#" id="eng" [ngClass]="{'active': eng === true}" (click)="engels()">ENG</a>&nbsp;&nbsp;<a href="#"
+        [ngClass]="{'active': nl === true}" id="nl" (click)="nederlands()">NL</a>&nbsp;&nbsp;<a href="#" id="fr"
+        [ngClass]="{'active': fr === true}" (click)="frans()">FR</a>
+    </p>
+  </div>
+</div>
 <div id="aanmelden" class="row justify-content-center">
   <div class="col-12">
-    <h1 class="text-center">Beste bezoeker. Meld u hier aan.</h1>
+    <h1 *ngIf="eng" class="text-center">Dear visitor. Log in here.</h1>
+    <h1 *ngIf="nl" class="text-center">Beste bezoeker. Meld u hier aan.</h1>
+    <h1 *ngIf="fr" class="text-center">Cher visiteur. Inscrivez-vous ici</h1>
   </div>
-  <div id="aandmeldform">
-    <form #visitorForm="ngForm" (ngSubmit)="addVisitor(visitorForm.value)">
+  <div class="col-3">
+    <form id="aandmeldform" #visitorForm="ngForm" (ngSubmit)="addVisitor(visitorForm.value)">
       <div class="form-group">
-        <label for="voornaam">Firstname *</label>
+        <label *ngIf="eng" for="voornaam">Firstname *</label>
+        <label *ngIf="nl" for="voornaam">Voornaam *</label>
+        <label *ngIf="fr" for="voornaam">Prénom *</label>
         <input type="text" (ngModel)="visitorValues.firstname" name="firstname" required class="form-control"
-          id="voornaam" placeholder="Enter firstname">
+          id="voornaam">
       </div>
       <div class="form-group">
-        <label for="achternaam">Lastname *</label>
-        <input type="text" (ngModel)="visitorValues.lastname" name="lastname" class="form-control" id="achternaam"
-          placeholder="Enter lastname">
+        <label *ngIf="eng" for="voornaam">Lastname *</label>
+        <label *ngIf="nl" for="voornaam">Achternaam *</label>
+        <label *ngIf="fr" for="voornaam">Nom *</label>
+        <input type="text" (ngModel)="visitorValues.lastname" name="lastname" class="form-control" id="achternaam">
       </div>
       <div class="form-group">
-        <label for="bedrijfsnaam">Company name</label>
+        <label *ngIf="eng" for="bedrijfsnaam">Company name</label>
+        <label *ngIf="nl" for="bedrijfsnaam">Bedrijfsnaam</label>
+        <label *ngIf="fr" for="bedrijfsnaam">Nom de compagnie</label>
         <input type="text" (ngModel)="visitorValues.companyname" name="companyname" class="form-control"
-          id="bedrijfsnaam" placeholder="Enter name of company">
+          id="bedrijfsnaam">
       </div>
       <div class="form-group">
-        <label for="type">Type visitor</label>
+        <label *ngIf="eng" for="type">Type visitor</label>
+        <label *ngIf="nl" for="type">Type bezoeker</label>
+        <label *ngIf="fr" for="type">Type visiteur</label>
         <select id="type" (ngModel)="visitorValues.type" name="type" class="form-control">
           <option *ngFor="let type of typeList" [value]="type">{{type}}</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="nummerplaat">License plate</label>
+        <label *ngIf="eng" for="nummerplaat">License plate</label>
+        <label *ngIf="nl" for="nummerplaat">Nummerplaat</label>
+        <label *ngIf="fr" for="nummerplaat">Plaque</label>
         <input type="text" (ngModel)="visitorValues.licensePlate" name="licensePlate" class="form-control"
-          id="nummerplaat" placeholder="Enter license plate">
+          id="nummerplaat">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button *ngIf="eng" type="submit" class="btn btn-primary">Submit</button>
+      <button *ngIf="nl" type="submit" class="btn btn-primary">Verzend</button>
+      <button *ngIf="fr" type="submit" class="btn btn-primary">Envoyer</button>
     </form>
   </div>
 </div>
 
+<div id="error" class="row" *ngIf="error">
+  <div class="col-10">
+    Firstname and lastname is mandatory.
+  </div>
+</div>
+
+<div id="created" class="row" *ngIf="created">
+  <div class="col-10">
+    {{currentVisitor}} just checked in!
+  </div>
+</div>
+
+
 <div id="afmelden" style="margin-top: 2rem;" class="row justify-content-center">
   <div class="col-12">
-    <h1 class="text-center">Meld u zeker hier af.</h1>
+    <h1 *ngIf="eng" class="text-center">Afterwards, log out here.</h1>
+    <h1 *ngIf="nl" class="text-center">Daarna, log u uit hier.</h1>
+    <h1 *ngIf="fr" class="text-center">Alors déconnectez-vous ici.</h1>
   </div>
-  <div id="aandmeldform">
+  <div id="afmeldform" class="col-6">
     <form #logoutForm="ngForm" (ngSubmit)="logVisitorOut(logoutForm.value)">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label style="color: white;" *ngIf="eng" for="name">Name</label>
+        <label style="color: white;" *ngIf="nl" for="name">Naam</label>
+        <label style="color: white;" *ngIf="fr" for="name">Nom</label>
         <select id="name" (ngModel)="logoutValues.name" name="name" class="form-control">
-          <option *ngFor="let vis of insideVisitors" [value]="vis.id">{{vis.lastName}}</option>
+          <option *ngFor="let vis of insideVisitors" [value]="vis.id">{{vis.firstName}} {{vis.lastName}}</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button *ngIf="eng" type="submit" class="btn btn-primary">Submit</button>
+      <button *ngIf="nl" type="submit" class="btn btn-primary">Verzend</button>
+      <button *ngIf="fr" type="submit" class="btn btn-primary">Envoyer</button>
     </form>
   </div>
 </div>

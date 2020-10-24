@@ -13,10 +13,14 @@ namespace MeatAndMoreAPI.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly MeatAndMoreContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public UserRepository(MeatAndMoreContext context)
+        public UserRepository(MeatAndMoreContext context, RoleManager<Role> roleManager, UserManager<User> userManager) 
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<UserDTO> GetUserDetails(string id)

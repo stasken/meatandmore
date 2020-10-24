@@ -17,7 +17,6 @@ export class AllInsideVisitorsComponent implements OnInit {
     "License plate",
     "Date",
     "Time in",
-    "Time out",
     "Remove from list",
   ];
   constructor(private visitorService: VisitorService) {}

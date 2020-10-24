@@ -1,3 +1,4 @@
+C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.csprojAssemblyReference.cache
 C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.AssemblyInfoInputs.cache
 C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.AssemblyInfo.cs
 C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.csproj.CoreCompileInputs.cache
@@ -137,4 +138,3 @@ C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\n
 C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.dll
 C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.pdb
 C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.genruntimeconfig.cache
-C:\Users\STAS\source\repos\MeatAndMore\MeatAndMoreAPI\MeatAndMoreAPI\obj\Debug\netcoreapp3.1\MeatAndMoreAPI.csprojAssemblyReference.cache

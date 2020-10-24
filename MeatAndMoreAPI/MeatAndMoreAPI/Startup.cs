@@ -87,6 +87,10 @@ namespace MeatAndMoreAPI
 
             app.UseRouting();
 
+
+            // START JWT
+            // =========
+
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
@@ -94,6 +98,9 @@ namespace MeatAndMoreAPI
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // END JWT
+            // =======
 
             app.UseEndpoints(endpoints =>
             {
